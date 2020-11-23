@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>To-Do List</title>
+  <link rel="stylesheet" href="./css/main.css">
+  <script src="./js/bundle.js"></script>
+</head>
+<body>
+    <div id="app">
+        <header>
+            <h1>ToDo's</h1>
+        </header>
+        <form v-on:submit.prevent="saveNewTask">
+            <input type="text" placeholder="Enter Task" id="new-task" v-model="newTask">
+            <input type="radio" name="priority" v-bind:value="true" v-model="newPriority">
+            <label for="true">High Priority</label>
+            <input type="radio" name="priority" v-bind:value="false" v-model="newPriority">
+            <label for="false">Low Priority</label>
+            <input type="submit" class="submit-button">
+        </form>
+        <ul id="to-do-list">
+            <li v-for="(task, index) in tasks" v-bind:class="task.isHighPriority ? 'high-priority':'low-priority'">
+                <span>{{ task.name }}</span>
+                <span v-if="task.isHighPriority">High Priority!</span>
+                <button v-on:click="changePriority(index)">Change Priority</button>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
